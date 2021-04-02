@@ -1,16 +1,17 @@
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
-
+import java.util.Arrays;
 public class ObjectManager {
 	Rocketship rocket;
-	ArrayList<Integer> projectiles = new ArrayList<Integer>();
-	ArrayList<Integer> aliens = new ArrayList<Integer>();
+	ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+	ArrayList<Alien> aliens = new ArrayList<Alien>();
 	Random random = new Random();
 	ObjectManager(Rocketship rocket){
 		this.rocket = rocket;
 	}
-	void addProjectile(Integer x) {
+	void addProjectile(Projectile x) {
 		projectiles.add(x);
 	}
 	void addAliens() {
@@ -18,9 +19,36 @@ public class ObjectManager {
 	}
 	void update() {
 		for (int i = 0; i < aliens.size(); i++) {
-			aliens[i].update();
-			if (aliens[i].getY >= LeagueInvaders.HEIGHT) {
-				aliens[i].isActive(false);
+			aliens.get(i).update();
+			if (aliens.get(i).y >= LeagueInvaders.HEIGHT) {
+				aliens.get(i).isActive = false;
+			}
+		}
+		for (int i = 0; i < projectiles.size(); i++) {
+			projectiles.get(i).update();
+			if (projectiles.get(i).y <= LeagueInvaders.HEIGHT) {
+				projectiles.get(i).isActive = false;
+			}
+		}
+	}
+	void draw(Graphics g) {
+		rocket.draw(g);
+		for (int i = 0; i < aliens.size(); i++) {
+			aliens.get(i).draw(g);
+		}
+		for (int i = 0; i < projectiles.size(); i++) {
+			projectiles.get(i).draw(g);
+		}
+	}
+	void purgeObjects() {
+		for (int i = 0; i < aliens.size(); i++) {
+			if (aliens.get(i).isActive = false) {
+				aliens.remove(i);
+			}
+		}
+		for (int j = 0; j < projectiles.size(); j++) {
+			if (projectiles.get(j).isActive = false) {
+				projectiles.remove(j);
 			}
 		}
 	}
