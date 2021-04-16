@@ -52,6 +52,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     }
     void updateGameState() {
     	manage.update();
+    	if (rocket.isActive=false) {
+			currentState = END;
+		}
     }
     void updateEndState() {
     }
@@ -102,9 +105,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		System.out.println("Action");
 		repaint();
-		if (e.getSource()==alienSpawn) {
-			manage.addAliens();
-		}
 	}
 	@Override
 	public void keyTyped(KeyEvent e) {
