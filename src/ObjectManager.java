@@ -5,20 +5,25 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Arrays;
+
 public class ObjectManager implements ActionListener {
 	Rocketship rocket;
 	ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	ArrayList<Alien> aliens = new ArrayList<Alien>();
 	Random random = new Random();
-	ObjectManager(Rocketship rocket){
+
+	ObjectManager(Rocketship rocket) {
 		this.rocket = rocket;
 	}
+
 	void addProjectile(Projectile x) {
 		projectiles.add(x);
 	}
+
 	void addAliens() {
-		aliens.add(new Alien(random.nextInt(LeagueInvaders.WIDTH),0,50,50));
+		aliens.add(new Alien(random.nextInt(LeagueInvaders.WIDTH), 0, 50, 50));
 	}
+
 	void update() {
 		for (int i = 0; i < aliens.size(); i++) {
 			aliens.get(i).update();
@@ -35,6 +40,7 @@ public class ObjectManager implements ActionListener {
 		checkCollision();
 		purgeObjects();
 	}
+
 	void draw(Graphics g) {
 		rocket.draw(g);
 		for (int i = 0; i < aliens.size(); i++) {
@@ -44,30 +50,34 @@ public class ObjectManager implements ActionListener {
 			projectiles.get(i).draw(g);
 		}
 	}
+
 	void purgeObjects() {
 		for (int i = 0; i < aliens.size(); i++) {
-			if (aliens.get(i).isActive = false) {
+			if (aliens.get(i).isActive == false) {
 				aliens.remove(i);
 			}
 		}
 		for (int j = 0; j < projectiles.size(); j++) {
-			if (projectiles.get(j).isActive = false) {
+			if (projectiles.get(j).isActive == false) {
 				projectiles.remove(j);
 			}
 		}
 	}
+
 	void checkCollision() {
 		for (int i = 0; i < aliens.size(); i++) {
-			if(rocket.collisionBox.intersects(aliens.get(i).collisionBox)) {
+			if (rocket.collisionBox.intersects(aliens.get(i).collisionBox)) {
 				aliens.get(i).isActive = false;
 			}
 			for (int j = 0; j < projectiles.size(); j++) {
-				if(projectiles.get(j).collisionBox.intersects(aliens.get(i).collisionBox)){
+				if (projectiles.get(j).collisionBox.intersects(aliens.get(i).collisionBox)) {
 					aliens.get(i).isActive = false;
+					projectiles.get(j).isActive = false;
 				}
 			}
 		}
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

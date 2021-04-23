@@ -1,3 +1,10 @@
+
+
+CHECK COLLISION IS NOT BEING CALLED
+
+
+
+
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -45,7 +52,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 	}
 	void startGame() {
-		 alienSpawn = new Timer(1000 , manage);
+		 alienSpawn = new Timer(10000 , manage);
 		 alienSpawn.start();
 	}
 	void updateMenuState() {
@@ -146,7 +153,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				}			
 			} else if(e.getKeyCode()==KeyEvent.VK_SPACE) {
 				manage.addProjectile(rocket.getProjectile());
-
 			}
 		}
 	}
