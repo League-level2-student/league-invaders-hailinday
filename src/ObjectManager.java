@@ -67,7 +67,6 @@ public class ObjectManager implements ActionListener {
 	}
 
 	void checkCollision() {
-		System.out.println("Collision");
 		for (int i = 0; i < aliens.size(); i++) {
 			if (rocket.collisionBox.intersects(aliens.get(i).collisionBox)) {
 				aliens.get(i).isActive = false;
@@ -82,8 +81,8 @@ public class ObjectManager implements ActionListener {
 			}
 		}
 	}
-	void getScore() {
-		System.out.println(score);
+	int getScore() {
+		return score;
 	}
 
 	@Override
